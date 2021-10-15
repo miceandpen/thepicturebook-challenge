@@ -186,3 +186,22 @@ if ( ! function_exists( 'colormag_main_section_inner_start' ) ) :
 	}
 
 endif;
+
+
+if ( ! function_exists( 'colormag_main_section_top_leaderboard' ) ) :
+
+	/**
+	 * Top leaderboard.
+	 */
+	function colormag_main_section_top_leaderboard() {
+		if ( !wp_is_mobile() ) {
+		?>
+		<div id="top-ad-area">
+			<div id="ptran-top-leaderboard" class="ad-callout" style="margin: 0 auto; max-width: 970px; max-height: 250px"></div>
+			<script>googletag.cmd.push(function() { googletag.display('ptran-top-leaderboard'); });</script>
+		</div>
+		<?php
+		}
+	}
+
+endif;

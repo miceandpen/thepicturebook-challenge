@@ -46,6 +46,9 @@ add_action( 'colormag_action_before_content', 'colormag_main_section_start', 10 
 // Main section inner starts.
 add_action( 'colormag_action_before_inner_content', 'colormag_main_section_inner_start', 10 );
 
+// Top leaderboard starts.
+add_action( 'colormag_action_top_leaderboard', 'colormag_main_section_top_leaderboard', 10 );
+
 
 /**
  * Hooks for the content of this theme.

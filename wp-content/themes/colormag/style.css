@@ -2079,6 +2079,30 @@ a#scroll-up:hover {
 	font-size: 12px;
 }
 
+/* =ADS
+----------------------------------------------- */
+.ad-callout:before{
+	content: 'ADVERTISEMENT';
+  font-size: 11px;
+  text-align: center;
+  color: #aaa;
+	display: inline-block;
+  width: 100%;
+}
+
+.injected-ad {
+	padding-bottom: 2em;
+	text-align: center;
+}
+
+#top-ad-area {
+	width: 100%;
+	text-align: center;
+	padding: 1em 0;
+	background-color: #eee;
+	min-height: 325px;
+}
+
 /* =POST CONTENT
 ----------------------------------------------- */
 .page-header .page-title {

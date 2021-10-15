@@ -262,3 +262,58 @@ function colormag_body_class( $classes ) {
 }
 
 add_filter( 'body_class', 'colormag_body_class' );
+
+function get_injected_ad( $id ) {
+	$ad_code = "<div id=\"". $id ."\" class=\"ad-callout injected-ad\"></div>
+		<script>
+		googletag.cmd.push(function() {
+			var responsiveSizes = googletag.sizeMapping().addSize([800, 600], [728, 90]).addSize([320, 480], [300, 250]).build();
+			googletag.defineSlot('/22360860229/Aditude/aditude_test1', [[728, 90], [300, 250]], '". $id ."').defineSizeMapping(responsiveSizes).addService(googletag.pubads());
+			googletag.pubads().enableSingleRequest();
+			googletag.enableServices();
+		});
+		</script>";
+
+	return $ad_code;
+}
+
+function ptran_inject_after_heading( $content ) {
+	$heading_tag = '</h2>';
+	$headings = explode( $heading_tag, $content );
+
+	if ( count( $headings ) > 0 ) {
+		$i = 1;
+		foreach ( $headings as $index => $heading ) {
+			if ( $index < count($headings) - 1 ) {
+				$headings[$index] .= $heading_tag . get_injected_ad( 'injected_after_heading_' . $i );
+				$i++;
+			}
+		}
+
+		return implode( '', $headings );
+	}
+
+	return $content;
+}
+
+add_filter( 'the_content', 'ptran_inject_after_heading' );
+
+function ptran_inject_after_paragraph( $content ) {
+	$paragraph_tag = '</p>';
+	$paragraphs = explode( $paragraph_tag, $content );
+
+	if ( count( $paragraphs ) > 0 ) {
+		if ( strlen( $paragraphs[0] ) > 125 ) {
+			$paragraphs[0] .= $paragraph_tag . get_injected_ad( 'injected_after_paragraph' );
+		}
+		else {
+			$paragraphs[1] .= $paragraph_tag . get_injected_ad( 'injected_after_paragraph' );
+		}
+
+		return implode( '', $paragraphs );
+	}
+
+	return $content;
+}
+
+add_filter( 'the_content', 'ptran_inject_after_paragraph' );
