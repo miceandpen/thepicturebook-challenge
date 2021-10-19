@@ -324,7 +324,7 @@ function ptran_inject_after_paragraph( $text, $i ) {
 	return $text;
 }
 
-function ptran_inject_after_heading( $content ) {
+function ptran_injections( $content ) {
 	$heading_tag = '</h2>';
 	$headings = explode( $heading_tag, $content );
 
@@ -345,4 +345,4 @@ function ptran_inject_after_heading( $content ) {
 	return $content;
 }
 
-add_filter( 'the_content', 'ptran_inject_after_heading' );
+add_filter( 'the_content', 'ptran_injections' );
