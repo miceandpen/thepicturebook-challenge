@@ -32,13 +32,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
 	<script async src="/wp-content/themes/colormag/js/prebid.js"></script>
 	<script>
-	var adUnits = [
+	window.prebidAdUnits = [
 			{
 				// aditude_test1
-				code: '/22360860229/Aditude/aditude_test1',
+				code: 'ptran-top-leaderboard',
 				mediaTypes: {
 						banner: {
-								sizes: [[970, 250], [728, 90], [300, 250]],
+								sizes: [[970, 250]],
 						},
 				},
 				bids: [
@@ -65,7 +65,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		},
 		{
         // aditude_test2
-        code: '/22360860229/Aditude/aditude_test2',
+        code: 'ptran-sidebar-top',
         mediaTypes: {
             banner: {
                 sizes: [[300, 250]],
@@ -95,7 +95,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     },
 		{
         // aditude_test3
-        code: '/22360860229/Aditude/aditude_test3',
+        code: 'ptran-sidebar-mid',
         mediaTypes: {
             banner: {
                 sizes: [[300, 600], [300, 250]],
@@ -137,7 +137,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   pbjs.que = pbjs.que || [];
 
   pbjs.que.push(function() {
-      pbjs.addAdUnits(adUnits);
+      pbjs.addAdUnits(window.prebidAdUnits);
 			pbjs.setConfig({
         priceGranularity: "high",
     	});
