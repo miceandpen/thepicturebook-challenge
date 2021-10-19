@@ -306,17 +306,37 @@ function get_injected_ad( $id ) {
 	return $ad_code;
 }
 
+function ptran_inject_after_paragraph( $text, $i ) {
+	$paragraph_tag = '</p>';
+	$paragraphs = explode( $paragraph_tag, $text );
+
+	if ( count( $paragraphs ) > 0 ) {
+		if ( strlen( strip_tags( trim( $paragraphs[0] ) ) ) > 125 ) {
+			$paragraphs[0] .= $paragraph_tag . get_injected_ad( 'injected_after_paragraph_' . $i );
+		}
+		else {
+			$paragraphs[1] .= $paragraph_tag . get_injected_ad( 'injected_after_paragraph_' . $i );
+		}
+
+		return implode( '', $paragraphs );
+	}
+
+	return $text;
+}
+
 function ptran_inject_after_heading( $content ) {
 	$heading_tag = '</h2>';
 	$headings = explode( $heading_tag, $content );
 
 	if ( count( $headings ) > 0 ) {
-		$i = 1;
-		foreach ( $headings as $index => $heading ) {
-			if ( $index < count($headings) - 1 ) {
-				$headings[$index] .= $heading_tag . get_injected_ad( 'injected_after_heading_' . $i );
-				$i++;
+		$i = 0;
+		foreach ( $headings as $index => $text ) {
+			if ( $index > 0 ) {
+				$headings[$index] = $heading_tag . get_injected_ad( 'injected_after_heading_' . $i );
+				$paragraphs = ptran_inject_after_paragraph($text, $i);
+				$headings[$index] .= $paragraphs;
 			}
+			$i++;
 		}
 
 		return implode( '', $headings );
@@ -326,23 +346,3 @@ function ptran_inject_after_heading( $content ) {
 }
 
 add_filter( 'the_content', 'ptran_inject_after_heading' );
-
-function ptran_inject_after_paragraph( $content ) {
-	$paragraph_tag = '</p>';
-	$paragraphs = explode( $paragraph_tag, $content );
-
-	if ( count( $paragraphs ) > 0 ) {
-		if ( strlen( $paragraphs[0] ) > 125 ) {
-			$paragraphs[0] .= $paragraph_tag . get_injected_ad( 'injected_after_paragraph' );
-		}
-		else {
-			$paragraphs[1] .= $paragraph_tag . get_injected_ad( 'injected_after_paragraph' );
-		}
-
-		return implode( '', $paragraphs );
-	}
-
-	return $content;
-}
-
-add_filter( 'the_content', 'ptran_inject_after_paragraph' );
