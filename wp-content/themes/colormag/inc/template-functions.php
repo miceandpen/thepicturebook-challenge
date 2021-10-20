@@ -272,28 +272,7 @@ function get_injected_ad( $id ) {
 					banner: {
 							sizes: [[728, 90], [300, 250]],
 					},
-			},
-			bids: [
-				{
-						 bidder: 'rhythmone',
-						 params: {
-								 placementId: '238205',
-						 },
-				},
-				{
-							bidder: '33across',
-							params: {
-									siteId: 'a3U8Oug8Or7ik1aKlKyvbs',
-									productId: 'siab',
-							},
-					},
-					{
-							bidder: 'pubmatic',
-							params: {
-									publisherId: '160912',
-							},
-					},
-			],
+			}
 		});
 		googletag.cmd.push(function() {
 			var responsiveSizes = googletag.sizeMapping().addSize([800, 600], [728, 90]).addSize([320, 480], [300, 250]).build();

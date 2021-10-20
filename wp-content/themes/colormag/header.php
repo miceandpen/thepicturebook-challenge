@@ -40,28 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						banner: {
 								sizes: [[970, 250]],
 						},
-				},
-				bids: [
-					{
-							 bidder: 'rhythmone',
-							 params: {
-									 placementId: '238205',
-							 },
-					},
-					{
-								bidder: '33across',
-								params: {
-										siteId: 'a3U8Oug8Or7ik1aKlKyvbs',
-										productId: 'siab',
-								},
-						},
-						{
-								bidder: 'pubmatic',
-								params: {
-										publisherId: '160912',
-								},
-						},
-				],
+				}
 		},
 		{
         // aditude_test2
@@ -70,28 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             banner: {
                 sizes: [[300, 250]],
             },
-        },
-        bids: [
-          {
-               bidder: 'rhythmone',
-               params: {
-                   placementId: '238205',
-               },
-          },
-          {
-                bidder: '33across',
-                params: {
-                    siteId: 'a3U8Oug8Or7ik1aKlKyvbs',
-                    productId: 'siab',
-                },
-            },
-            {
-                bidder: 'pubmatic',
-                params: {
-                    publisherId: '160912',
-                },
-            },
-        ],
+        }
     },
 		{
         // aditude_test3
@@ -100,30 +58,32 @@ if ( ! defined( 'ABSPATH' ) ) {
             banner: {
                 sizes: [[300, 600], [300, 250]],
             },
-        },
-        bids: [
-          {
-               bidder: 'rhythmone',
-               params: {
-                   placementId: '238205',
-               },
-          },
-          {
-                bidder: '33across',
-                params: {
-                    siteId: 'a3U8Oug8Or7ik1aKlKyvbs',
-                    productId: 'siab',
-                },
-            },
-            {
-                bidder: 'pubmatic',
-                params: {
-                    publisherId: '160912',
-                },
-            },
-        ],
-    },
+        }
+    }
 	];
+
+	var bidders = [
+		{
+				 bidder: 'rhythmone',
+				 params: {
+						 placementId: '238205',
+				 },
+		},
+		{
+					bidder: '33across',
+					params: {
+							siteId: 'a3U8Oug8Or7ik1aKlKyvbs',
+							productId: 'siab',
+					},
+			},
+			{
+					bidder: 'pubmatic',
+					params: {
+							publisherId: '160912',
+					},
+			}
+	];
+
 	var PREBID_TIMEOUT = 2500;
 	var FAILSAFE_TIMEOUT = 3e3;
 
@@ -137,6 +97,10 @@ if ( ! defined( 'ABSPATH' ) ) {
   pbjs.que = pbjs.que || [];
 
   pbjs.que.push(function() {
+			window.prebidAdUnits.map(function(slot) {
+				slot.bids = bidders;
+			});
+
       pbjs.addAdUnits(window.prebidAdUnits);
 			pbjs.setConfig({
         priceGranularity: "high",
